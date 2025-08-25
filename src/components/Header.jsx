@@ -1,7 +1,12 @@
 import { useState } from "react";
 import { FaBell, FaUser } from "react-icons/fa";
+import { NavLink } from "react-router-dom";
 
 const Header = ({ role , onRaiseComplaint, onAssignedComplaints }) => {
+
+  const settoken=()=>{
+    localStorage.setItem("token"," ")
+  }
   const [menuOpen, setMenuOpen] = useState(false);
 
   const toggleMenu = () => setMenuOpen((prev) => !prev);
@@ -59,7 +64,17 @@ const Header = ({ role , onRaiseComplaint, onAssignedComplaints }) => {
             </div>
           )}
           <div className="p-2 bg-gray-200 m-2 rounded hover:bg-gray-300 cursor-pointer">
-            Logout
+          
+            <NavLink 
+            onClick={()=>settoken()}
+                to="/"
+                style={({ isActive }) => ({
+                    fontWeight: isActive ? 'bold' : 'normal',
+                    color: isActive ? 'black' : 'black'
+                })}
+              >
+                Logout
+                </NavLink>
           </div>
         </div>
       )}

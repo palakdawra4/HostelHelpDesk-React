@@ -1,34 +1,45 @@
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import { GetTimeslot } from "../API/ManageTimeslotAPI";
+import { AddComplaint, GetComplaitType } from "../API/ComplaintsAPI";
 
 const RaiseComplaint=({ onAddComplaint })=>{
 
-const [complainttype,setcomplainttype]=useState('Plumbing')
-const [timeslot, settimeslot] = useState("");
+const [complainttype,setcomplainttype]=useState([])
+const [timeslot, settimeslot] = useState([]);
 const [description, setDescription] = useState("");
+const [timeslotId,setTimeslotId]=useState("")
+const [complaintid,setcomplaintid]=useState('')
+const[toggle,settoggle]=useState(false)
 
 
-//  const handleSubmit = (e) => {
-//     e.preventDefault();
-//     onAddComplaint(formData);
-//     setFormData({
-//       type: "",
-//       madeOn: new Date().toLocaleDateString("en-GB", {
-//         day: "2-digit",
-//         month: "short",
-//         year: "numeric",
-//       }),
-//       closedOn: "",
-//       worker: "",
-//       timeslot: "",
-//       status: "Pending",
-//     });
-//   };
+ const handleSubmit = (e) => {
+    e.preventDefault();
+    // onAddComplaint(formData);
+    AddComplaint(complaintid,timeslotId,description)
+    setcomplaintid('')
+    setTimeslotId('')
+    setDescription('')
+    settoggle(true)
+  };
 
+
+
+useEffect(()=>{
+
+GetComplaitType()
+.then((res)=>{setcomplainttype(res.data)})
+  .catch((err)=>console.log(err))
+
+  
+  GetTimeslot()
+  .then((res)=>{settimeslot(res.data)})
+  .catch((err)=>console.log(err))
+},[])
 
     return (
     <div className=" ">
-  <form className="bg-gray-300 rounded-xl p-6 space-y-5 border border-gray-700 ">
+  <form className="bg-gray-300 rounded-xl p-6 space-y-5 border border-gray-700 "onSubmit={handleSubmit}>
     <h2 className="text-2xl font-semibold text-center text-gray-800">Raise Complaint</h2>
 
     {/* Complaint Type */}
@@ -37,15 +48,14 @@ const [description, setDescription] = useState("");
         Complaint Type
       </label>
       <select
-        id="complaintType"
-        name="complaintType"
-        value={complainttype}
-        onChange={(e) => setcomplainttype(e.target.value)}
-        className="w-full border border-black-300 rounded-lg p-2 "
-      >
-        <option value="Plumbing">Plumbing</option>
-        <option value="Carpenter">Carpenter</option>
-        <option value="Electrician">Electrician</option>
+      value={complaintid}
+      onChange={(e)=>setcomplaintid(e.target.value)}
+      className="w-full border border-black-300 rounded-lg p-2 ">
+      <option value=''>Select Complaint Type</option>
+      {complainttype.map((c)=>(
+          <option key={c.id} value={c.id}>{c.name}</option>
+      ))}
+       
       </select>
     </div>
 
@@ -71,16 +81,13 @@ const [description, setDescription] = useState("");
           Timeslot
         </label>
         <select
-          type="text"
-          id="timeslot"
-          name="timeslot"
-          placeholder="e.g 10:00am - 12:00am"
-          value={timeslot}
-          onChange={(e) => settimeslot(e.target.value)}
-          className="w-full border border-black-300 rounded-lg p-2 "
-         >
-        <option >10:00-12:00</option>
-        <option>1:00-2:00</option>
+        value={timeslotId}
+        onChange={(e)=>setTimeslotId(e.target.value)}
+       className="w-full border border-black-300 rounded-lg p-2 " >
+          <option value=''>Select TimeSlot</option>
+          {timeslot.map((t)=>(
+            <option key={t.id} value={t.id}>{t.timeslots}</option>
+          ))}
         </select>
 
         
@@ -93,12 +100,15 @@ const [description, setDescription] = useState("");
     >
       Submit
     </button>
+    {toggle &&(
+        <h2>Complaint Raised</h2>
+    )}
   </form>
   </div>
 
 )
-
 }
+
 
 
 export default RaiseComplaint

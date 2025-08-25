@@ -33,20 +33,17 @@ const handleLogin = async (e) => {
       // Redirect based on role
       if (user.role === "Admin") {
         navigate("/admin");
-      } else if (user.role === "student") {
+      } else if (user.role === "Student") {
         navigate("/student");
       } else if (user.role === "Caretaker") {
         navigate("/caretaker");
-      } else if (user.role === "worker") {
+      } else if (user.role === "Worker") {
         navigate("/worker");
       }
     } catch (err) {
       setError("Invalid email or password");
     }
   };
-
-
-
 
 
 

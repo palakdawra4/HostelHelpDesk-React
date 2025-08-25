@@ -1,25 +1,24 @@
-import {React,useState} from "react";
+import {React,useEffect,useState} from "react";
 import RaiseComplaint from "./RaiseComplaint";
 import Header from "../components/Header";
 import { FaXmark } from "react-icons/fa6"; 
 import ViewComplaints from "./ViewComplaints";
-
-const complaints=[
-    {
-      id: "COM-2386",
-      type: "Plumbing",
-      madeOn: "12-Aug-2025",
-      closedOn: "12-Aug-2025",
-      description:"leakage",
-      worker: "Ram Babu",
-      timeslot: "10:00 AM - 12:00 PM",
-      status: "Completed",
-    },
-  ];
+import { Complaints } from "../API/ComplaintsAPI";
 
 
 const StudentDashboard = () => {
   const [showComplaintForm, setShowComplaintForm] = useState(false);
+  const [complaints,setcomplaints]= useState ([]);
+
+  useEffect(()=>{
+  Complaints()
+  .then((res)=>{
+    console.log(res.data)
+    setcomplaints(res.data)})
+  .catch((err)=>console.log(err))
+},[])
+
+
 
   return (
     <>
