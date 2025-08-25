@@ -2,7 +2,16 @@ import axios from "axios";
 import config from "./config";
 const API_URL = config.apiUrl;
 
-export const RoomData=(id)=>axios.get(`${API_URL}/Dashboard/ManageRoom/${id}`)
+export const RoomData=(id)=>{
+    const token=localStorage.getItem('token')
+    return axios.get(`${API_URL}/Dashboard/ManageRoom/${id}`,
+    
+     {
+            headers:{
+                Authorization:`bearer ${token}`
+            }
+        }
+)}
 
 export const AddRoom=async(hostelId,roomNo)=>{
      const token=localStorage.getItem("token")

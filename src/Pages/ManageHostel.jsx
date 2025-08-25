@@ -53,8 +53,8 @@ useEffect(()=>{
   };
 
   return (
-    <div className="p-1.5 border-2 w-100%">
-      <div className="flex justify-between items-center mb-4 border-2">
+    <div className="p-1.5  w-100%">
+      <div className="flex justify-between items-center mb-4 bg-[#EAE4D5]">
         <h2 className="text-xl font-bold">Manage Hostels</h2>
         <button
           onClick={handleAdd}

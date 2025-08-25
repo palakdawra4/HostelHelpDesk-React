@@ -2,8 +2,8 @@ import { Link,NavLink } from 'react-router-dom';
 
 const Sidebar=()=>{
     return(
-        <div className="w-100% bg-blue-300 h-screen  ">
-            <div className="flex flex-col p-2  bg-blue-300 m-1  text-xl">
+        <div className="w-100% bg-[#F2F2F2] h-screen  ">
+            <div className="flex flex-col pt-3 pl-2 text-xl">
             <NavLink 
                 to="/admin/manage-hostel"
                 style={({ isActive }) => ({
@@ -14,7 +14,7 @@ const Sidebar=()=>{
                 Manage Hostel
                 </NavLink>
             </div>
-            <div className="flex flex-col p-2 bg-blue-300 m-1 text-xl ">
+            <div className="flex flex-col  pt-3 pl-2 text-xl ">
                <NavLink 
                 to="/admin/manage-users"
                 style={({ isActive }) => ({
@@ -25,7 +25,7 @@ const Sidebar=()=>{
                 Manage Users
                 </NavLink>
             </div>
-            <div className="flex flex-col p-2  bg-blue-300 m-1 text-xl ">
+            <div className="flex flex-col  pt-3 pl-2 text-xl ">
                 <NavLink 
                 to="/admin/manage-timeslot"
                 style={({ isActive }) => ({

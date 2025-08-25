@@ -7,9 +7,9 @@ function Layout() {
   return (
    <>
     <Header role="admin"/>
-    <div className='flex border-1'>
+    <div className='flex'>
         <div className='w-1/5 min-h-screen  '><Sidebar/></div>
-        <div className='w-4/5 p-1'> 
+        <div className='w-4/5'> 
         <Outlet/>
         </div>
     </div>

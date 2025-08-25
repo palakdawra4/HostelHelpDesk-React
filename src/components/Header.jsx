@@ -13,12 +13,12 @@ const Header = ({ role , onRaiseComplaint, onAssignedComplaints }) => {
   // const normalizedRole = (role ?? "").toLowerCase().trim();
 
   return (
-    <header className="bg-blue-300 p-3 w-screen flex items-center justify-between">
+    <header className="bg-[#B6B09F] w-screen flex items-center justify-between h-12">
       {/* Logo / Title */}
-      <div className="text-lg font-bold text-xl">Hostel Help Desk</div>
+      <div className="font-bold text-2xl ml-2">Hostel Help Desk</div>
 
       {/* Navigation + Icons */}
-      <div className="flex items-center space-x-4">
+      <div className="flex items-center space-x-4 bg-[#B6B09F]">
         {/* Role-based main navigation */}
         {console.log(role)}
         {role === "admin"||"worker"&&(
@@ -49,9 +49,9 @@ const Header = ({ role , onRaiseComplaint, onAssignedComplaints }) => {
       */}
       
         {/* Icons */}
-        <FaBell className="cursor-pointer" />
-        <button className="relative" onClick={toggleMenu}>
-          <FaUser className="cursor-pointer" />
+        <FaBell className="cursor-pointer " />
+        <button className="relative " onClick={toggleMenu} >
+          <FaUser className="cursor-pointer bg-[#B6B09F] " />
         </button>
       </div>
 
